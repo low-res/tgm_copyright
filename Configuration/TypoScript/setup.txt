@@ -67,31 +67,31 @@ plugin.tx_tgmcopyright_main {
 }
 
 [globalVar = LIT:0 < {$plugin.tx_tgmcopyright_main.settings.createSitemap}]
-image-sitemap = PAGE
-image-sitemap {
-  typeNum = 1458065166
-  config {
-    disableAllHeaderCode = 1
-    xhtml_cleaning = none
-    admPanel = 0
-    debug = 0
-    disablePrefixComment = 1
-    disableCharsetHeader = 1
-    additionalHeaders.10.header = Content-Type:text/xml;charset=utf-8
-  }
-  10 = USER
-  10 {
-    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    extensionName = TgmCopyright
-    pluginName = Main
-    vendorName = TGM
-    switchableControllerActions {
-      Copyright {
-        1 = sitemap
+  image-sitemap = PAGE
+  image-sitemap {
+    typeNum = 1458065166
+    config {
+      disableAllHeaderCode = 1
+      xhtml_cleaning = none
+      admPanel = 0
+      debug = 0
+      disablePrefixComment = 1
+      disableCharsetHeader = 1
+      additionalHeaders.10.header = Content-Type:text/xml;charset=utf-8
+    }
+    10 = USER
+    10 {
+      userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+      extensionName = TgmCopyright
+      pluginName = Main
+      vendorName = TGM
+      switchableControllerActions {
+        Copyright {
+          1 = sitemap
+        }
       }
     }
   }
-}
 [end]
 
 

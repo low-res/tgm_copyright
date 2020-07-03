@@ -12,6 +12,5 @@ $temp_metacolumns = array(
 	),
 );
 
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('sys_file_metadata',$temp_metacolumns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('sys_file_metadata','','copyright','after:source');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes("sys_file_metadata","copyright","","description");
