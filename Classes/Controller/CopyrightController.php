@@ -43,19 +43,22 @@ class CopyrightController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
      * @inject
      */
     protected $copyrightReferenceRepository = NULL;
-    
+
     /**
      * action list
      * @return void
      */
     public function listAction()
     {
-
-        $copyrightReferences = $this->copyrightReferenceRepository->findByRootline($this->settings);
+        $rid                    = $this->settings["rootlinepage"];
+        $this->settings["rootlines"] = $rid;
+        $copyrightReferences    = $this->copyrightReferenceRepository->findByRootline( $this->settings );
 
         if(count($copyrightReferences) > 0) {
             $this->processExtensionReferences($copyrightReferences);
         }
+
+//        DebuggerUtility::var_dump($copyrightReferences);
 
         $this->view->assignMultiple([
             'copyrightReferences' => $copyrightReferences,
@@ -118,6 +121,7 @@ class CopyrightController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 
         /** @var ContentObjectRenderer $contentObject */
         $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
+
         /** @var \TYPO3\CMS\Frontend\Page\PageRepository $pageRepository */
         $pageRepository = GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\Page\PageRepository::class);
 
@@ -125,11 +129,9 @@ class CopyrightController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         foreach ($copyrightReferences as $copyrightReference) {
 
             $additionalLinkParams = '';
-
             if(true === isset($allExtensionTablesConfiguration[$copyrightReference->getTablenames()])
                 && true === isset($allExtensionTablesConfiguration[$copyrightReference->getTablenames()]['detailPid'])
             ) {
-
                 $singleExtensionTableConfiguration = $allExtensionTablesConfiguration[$copyrightReference->getTablenames()];
 
                 if(gettype($singleExtensionTableConfiguration['detailPid']) === 'array') {
@@ -148,8 +150,9 @@ class CopyrightController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
                     $usagePids = GeneralUtility::trimExplode(',',$tsResult,true);
 
                 } else {
+                    $uid = $singleExtensionTableConfiguration['detailPid'];
+                    $usagePids = [$uid];
 
-                    $usagePids = [$singleExtensionTableConfiguration['detailPid']];
 
                 }
 
@@ -164,6 +167,8 @@ class CopyrightController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
             }
 
             $copyrightReference->setUsagePids($usagePids);
+            $usagePagetitles = [$pageRepository->getPage($usagePids[0])["title"]];
+            $copyrightReference->setUsagePagetitels($usagePagetitles);
             $copyrightReference->setAdditionalLinkParams($additionalLinkParams);
 
         }
