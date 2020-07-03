@@ -66,6 +66,13 @@ class CopyrightReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
 	protected $usagePids = [];
 
+
+    /**
+     * Will be set inside the controller
+     * @var array
+     */
+    protected $usagePagetitles = [];
+
     /**
      * Will be set inside the controller
      * @var string
@@ -180,5 +187,24 @@ class CopyrightReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
     {
         $this->additionalLinkParams = $additionalLinkParams;
     }
+
+    /**
+     * @return array
+     */
+    public function getUsagePagetitles (): array
+    {
+        return $this->usagePagetitles;
+    }
+
+    /**
+     * @param array $usagePagetitles
+     */
+    public function setUsagePagetitles ( array $usagePagetitles ): void
+    {
+        $this->usagePagetitles = $usagePagetitles;
+    }
+
+
+
 
 }
