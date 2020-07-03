@@ -8,7 +8,7 @@
 				<f:for each="{copyrightReference.usagePids}" as="usagePid">
 					<li>
 						<f:link.typolink parameter="{usagePid}" additionalParams="{copyrightReference.additionalLinkParams}">
-							<span class="pagetitle">{copyrightReference.usagePagetitels.0}</span>
+							<span class="pagetitle">{copyrightReference.usagePagetitles.0}</span>
 							<f:if condition="{copyrightReference.title}">
 								<f:then>{copyrightReference.title}</f:then>
 								<f:else>{copyrightReference.originalResource.properties.name}</f:else>
