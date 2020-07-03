@@ -168,7 +168,7 @@ class CopyrightController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 
             $copyrightReference->setUsagePids($usagePids);
             $usagePagetitles = [$pageRepository->getPage($usagePids[0])["title"]];
-            $copyrightReference->setUsagePagetitels($usagePagetitles);
+            $copyrightReference->setUsagePagetitles($usagePagetitles);
             $copyrightReference->setAdditionalLinkParams($additionalLinkParams);
 
         }
